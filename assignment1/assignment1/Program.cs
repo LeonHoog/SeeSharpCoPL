@@ -1,6 +1,4 @@
-﻿using assignment1;
-
-Console.WriteLine("Hello, World!");
+﻿Console.Write("Please enter an untyped lambda function: ");
 
 string input = string.Empty;
 
