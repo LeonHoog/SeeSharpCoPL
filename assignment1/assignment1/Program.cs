@@ -26,7 +26,7 @@ while (true)
 	catch (Exception e)
 	{
 		Console.ForegroundColor = ConsoleColor.Red;
-		Console.WriteLine($"caught exception: {e.Message}");
+		Console.WriteLine($"Caught exception: {e.Message}");
 		Console.ForegroundColor = ConsoleColor.White;
 		continue;
 	}

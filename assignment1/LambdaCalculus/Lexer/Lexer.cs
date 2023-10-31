@@ -14,6 +14,9 @@ public static class Lexer
 		// Create a list of tokens
 		List<Token> tokens = new();
 
+		// Create a variable to store the number of open parentheses
+		int parentheses = 0;
+
 		// Loop through each character in the input
 		int index = 0;
 		while (index < input.Length)
@@ -35,10 +38,17 @@ public static class Lexer
 				case '(':
 					tokens.Add(new(TokenType.OpenParentheses, "("));
 					index++;
+					parentheses++;
 					break;
 				case ')':
 					tokens.Add(new(TokenType.CloseParentheses, ")"));
 					index++;
+					parentheses--;
+
+					// If the parentheses count is less than zero, throw an exception
+					if (parentheses < 0)
+						throw new UnexpectedCharacterException(')', index);
+
 					break;
 				default:
 					// Check if the current character is a letter
@@ -64,6 +74,10 @@ public static class Lexer
 					break;
 			}
 		}
+
+		// If the parentheses count is not zero, throw an exception
+		if (parentheses != 0)
+			throw new MissingParenthesesException(input.Length + 1);
 
 		// Return the tokens
 		return tokens.ToArray();
