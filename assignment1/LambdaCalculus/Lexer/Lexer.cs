@@ -56,7 +56,9 @@ public static class Lexer
 					{
 						// Create a string builder and loop through each character in the input until we reach a non-letter
 						StringBuilder variable = new(5);
-						while (index < input.Length && (char.IsLetter(input[index]) || char.IsDigit(input[index])))
+
+						// While the current character is not a lambda, open parentheses, close parentheses, or whitespace
+						while (index < input.Length && input[index] is not '\\' and not 'λ' and not '.' and not '(' and not ')' && !char.IsWhiteSpace(input[index]))
 							variable.Append(input[index++]);
 						tokens.Add(new(TokenType.Variable, variable.ToString()));
 					}

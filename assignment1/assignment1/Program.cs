@@ -1,37 +1,86 @@
 ﻿using System.Text;
+using System.Runtime.InteropServices;
 
 using LambdaCalculus.Lambda;
 using LambdaCalculus.Parser;
 
-// Make sure the current input encoding can handle unicode
-Console.InputEncoding = Encoding.Unicode;
-Console.OutputEncoding = Encoding.Unicode;
-
-while (true)
+internal class Program
 {
-	// Ask the user to enter a lambda expression
-	Console.Write("Please enter an untyped lambda function: ");
-
-	// If the user enters an empty string or exit, exit the program
-	string input = Console.ReadLine()!;
-	if (input is "" or "exit")
-		break;
-
-	// Parse the input, catch any exceptions and print them in red
-	ILambdaExpression? expression;
-	try
+	private static void Main(string[] args)
 	{
-		expression = Parser.Parse(input);
-	}
-	catch (Exception e)
-	{
-		Console.ForegroundColor = ConsoleColor.Red;
-		Console.WriteLine($"Caught exception: {e.Message}");
-		Console.ForegroundColor = ConsoleColor.White;
-		continue;
+		// Make sure the current input encoding can handle unicode
+		// Set the input and output encoding to UTF-8 as most of the expected input is ASCII, making UTF-16 a waste of space
+		Console.InputEncoding = Encoding.UTF8;
+		Console.OutputEncoding = Encoding.UTF8;
+
+		// If there's no arguments, run the while loop
+		if (args.Length == 0)
+			NormalLoop();
+
+		// If there's arguments, open the file and run the program
+		else
+			FileLoop(args[0]);
 	}
 
-	// Print the expression
-	Console.Write("Parsed expression: ");
-	Parser.Print(expression!);
+	static void FileLoop(string path)
+	{
+		// Open the file
+		using StreamReader file = new(path);
+
+		// Read the file line by line
+		while (!file.EndOfStream)
+		{
+			// Read the line
+			string line = file.ReadLine()!;
+
+			// Print the line
+			Console.WriteLine($"Read line: {line}");
+
+			// Parse the line
+			ParseTest(line);
+		}
+	}
+
+	static void NormalLoop()
+	{
+		while (true)
+		{
+			// Ask the user to enter a lambda expression
+			Console.Write("Please enter an untyped lambda function: ");
+
+			// If the user enters an empty string or exit, exit the program
+			string input = Console.ReadLine()!;
+			if (input is "" or "exit")
+				break;
+
+			// Parse the input
+			ParseTest(input);
+		}
+	}
+
+	static void ParseTest(string line)
+	{
+		// Parse the line, catch any exceptions and print them in red
+		ILambdaExpression? expression;
+		try
+		{
+			expression = Parser.Parse(line);
+		}
+		catch (Exception e)
+		{
+			// Store the current foreground color
+			ConsoleColor color = Console.ForegroundColor;
+
+			Console.ForegroundColor = ConsoleColor.Red;
+			Console.WriteLine($"Caught exception: {e.Message}");
+
+			// Restore the foreground color
+			Console.ForegroundColor = color;
+			return;
+		}
+
+		// Print the expression
+		Console.Write("Parsed expression: ");
+		Parser.Print(expression!);
+	}
 }
