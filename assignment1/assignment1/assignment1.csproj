@@ -1,15 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <AnalysisLevel>latest-recommended</AnalysisLevel>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<AnalysisLevel>latest-recommended</AnalysisLevel>
 
-  <ItemGroup>
-    <ProjectReference Include="..\LambdaCalculus\LambdaCalculus.csproj" />
-  </ItemGroup>
+		<PublishAot>true</PublishAot>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\LambdaCalculus\LambdaCalculus.csproj" />
+	</ItemGroup>
 
 </Project>

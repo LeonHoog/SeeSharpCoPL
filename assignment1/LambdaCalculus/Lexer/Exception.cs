@@ -1,7 +1,8 @@
-﻿using System.Data;
+﻿namespace LambdaCalculus.Lexer;
 
-namespace LambdaCalculus.Lexer;
-
+/// <summary>
+/// Thrown when the lexer encounters an unexpected character
+/// </summary>
 public class UnexpectedCharacterException : Exception
 {
 	public UnexpectedCharacterException(char character, int position)
@@ -10,6 +11,9 @@ public class UnexpectedCharacterException : Exception
 	}
 }
 
+/// <summary>
+/// Thrown when the lexer encounters a missing parentheses
+/// </summary>
 public class MissingParenthesesException : Exception
 {
 	public MissingParenthesesException(int position)

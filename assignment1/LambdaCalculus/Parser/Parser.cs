@@ -5,12 +5,14 @@ namespace LambdaCalculus.Parser;
 
 public static class Parser
 {
-	/// Format
-	// <expression> ::= <variable> | <abstraction> | <application> | <Token.ParenthesesOpen> <expression> <Token.ParenthesesClose>
-	// <variable> ::= <Token.Variable>
-	// <abstraction> ::= <Token.Lambda> <Token.Variable> <Token.Dot> <expression>
-	// <application> ::= <expression> <expression>
-
+	/// <summary>
+	/// Parses an array of tokens into a lambda expression
+	/// </summary>
+	/// <param name="tokens">The array of tokens to parse</param>
+	/// <returns>A lambda expression</returns>
+	/// <exception cref="UnexpectedTokenException"></exception>
+	/// <exception cref="UnexpectedEndOfInputException"></exception>
+	/// <exception cref="UnpairedParenthesesException"></exception>
 	public static ILambdaExpression? Parse(Token[] tokens)
 	{
 		// Convert the tokens to a queue where they get consumed from the front
@@ -156,9 +158,21 @@ public static class Parser
 		}
 	}
 
+	/// <summary>
+	/// Parses a string into a lambda expression
+	/// </summary>
+	/// <param name="input">The string to parse</param>
+	/// <returns>A lambda expression</returns>
+	/// <exception cref="UnexpectedTokenException"></exception>
+	/// <exception cref="UnexpectedEndOfInputException"></exception>
+	/// <exception cref="UnpairedParenthesesException"></exception>
 	public static ILambdaExpression? Parse(string input) =>
 		Parse(Lexer.Lexer.Tokenize(input));
 
+	/// <summary>
+	/// Prints a lambda expression to the console
+	/// </summary>
+	/// <param name="expression">The lambda expression to print</param>
 	public static void Print(ILambdaExpression expression)
 	{
 		// Store the color

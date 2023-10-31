@@ -9,9 +9,9 @@ OUT = bin/
 # The default target
 default: build
 
-# The target to build the executable file
+# The target to build the executable file with AOT compilation
 build:
-	dotnet publish -c Release $(SRC) -o $(OUT)
+	dotnet publish -c Release $(SRC) -o $(OUT) -r linux-x64
 
 # The target to run the executable file
 run: build

@@ -5,7 +5,14 @@
 /// </summary>
 public readonly struct Token
 {
+	/// <summary>
+	/// The type of the token
+	/// </summary>
 	public TokenType Type { get; }
+
+	/// <summary>
+	/// The value of the token
+	/// </summary>
 	public string? Value { get; }
 
 	/// <summary>
@@ -25,7 +32,10 @@ public readonly struct Token
 	/// <param name="type">The type of the token</param>
 	public Token(TokenType type) : this(type, null) { }
 
-	// ToString function for Token that returns both the type and value:
+	/// <summary>
+	/// Returns a string representation of the token
+	/// </summary>
+	/// <returns>A string representation of the token</returns>
 	public override string ToString() =>
 		$"{Type} ({Value})";
 
