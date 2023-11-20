@@ -74,6 +74,5 @@ void ParseTest(string line)
 	}
 
 	// Print the expression
-	Console.Write("Parsed expression: ");
 	Parser.Print(expression!);
 }
