@@ -3,31 +3,43 @@
 /// <summary>
 /// Thrown when the parser encounters an unexpected token
 /// </summary>
-public class UnexpectedTokenException : System.Exception
+public class UnexpectedTokenException : Exception
 {
+	/// <summary>
+	/// Creates a new unexpected token exception
+	/// </summary>
+	/// <param name="message">The message of the exception</param>
 	public UnexpectedTokenException(string message = "Unexpected token") : base(message) { }
 }
 
 /// <summary>
 /// Thrown when the parser encounters an unexpected end of input
 /// </summary>
-public class UnexpectedEndOfInputException : System.Exception
+public class UnexpectedEndOfInputException : Exception
 {
+	/// <summary>
+	/// Creates a new unexpected end of input exception
+	/// </summary>
+	/// <param name="message">The message of the exception</param>
 	public UnexpectedEndOfInputException(string message = "Unexpected end of input") : base(message) { }
 }
 
 /// <summary>
 /// Thrown when the parser encounters an unpairded parentheses
 /// </summary>
-public class UnpairedParenthesesException : System.Exception
+public class UnpairedParenthesesException : Exception
 {
+	/// <summary>
+	/// Creates a new unpaired parentheses exception
+	/// </summary>
+	/// <param name="message">The message of the exception</param>
 	public UnpairedParenthesesException(string message = "Unpaired parentheses") : base(message) { }
 }
 
 /// <summary>
 /// Thrown when the parser encounters an empty parentheses pair
 /// </summary>
-public class EmptyParenthesesException : System.Exception
+public class EmptyParenthesesException : Exception
 {
 	public EmptyParenthesesException(string message = "Empty parentheses") : base(message) { }
 }

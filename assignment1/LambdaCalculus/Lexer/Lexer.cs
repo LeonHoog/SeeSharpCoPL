@@ -2,6 +2,9 @@
 
 namespace LambdaCalculus.Lexer;
 
+/// <summary>
+/// The lexer
+/// </summary>
 public static class Lexer
 {
 	/// <summary>

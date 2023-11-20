@@ -15,6 +15,11 @@ public class LambdaApplication : ILambdaExpression
 	/// </summary>
 	public ILambdaExpression Argument { get; set; }
 
+	/// <summary>
+	/// Creates a new lambda application
+	/// </summary>
+	/// <param name="function">The function of the application</param>
+	/// <param name="argument">The argument of the application</param>
 	public LambdaApplication(ILambdaExpression function, ILambdaExpression argument)
 	{
 		Function = function;

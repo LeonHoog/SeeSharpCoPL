@@ -3,6 +3,9 @@ using LambdaCalculus.Lexer;
 
 namespace LambdaCalculus.Parser;
 
+/// <summary>
+/// A parser for lambda expressions
+/// </summary>
 public static class Parser
 {
 	/// <summary>

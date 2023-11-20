@@ -15,6 +15,11 @@ public class LambdaAbstraction : ILambdaExpression
 	/// </summary>
 	public ILambdaExpression Body { get; set; }
 
+	/// <summary>
+	/// Creates a new lambda abstraction
+	/// </summary>
+	/// <param name="name">The name of the variable</param>
+	/// <param name="body">The body of the abstraction</param>
 	public LambdaAbstraction(LambdaVariable name, ILambdaExpression body)
 	{
 		Name = name;
