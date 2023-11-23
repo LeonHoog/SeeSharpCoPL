@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents a token
 /// </summary>
-public readonly struct Token
+public readonly struct Token : IEquatable<Token>
 {
 	/// <summary>
 	/// The type of the token
@@ -45,7 +45,24 @@ public readonly struct Token
 
 	// Allow implicit conversion from Token to string
 	public static implicit operator string(Token token) =>
-		token.Value ?? throw new FormatException("Token value is null");
+		token.Value ?? string.Empty;
+
+	public override bool Equals(object? obj) =>
+		obj is Token token &&
+			Type == token.Type &&
+			Value == token.Value;
+
+	public override int GetHashCode() =>
+		HashCode.Combine(Type, Value);
+
+	public static bool operator ==(Token left, Token right) =>
+		left.Equals(right);
+
+	public static bool operator !=(Token left, Token right) =>
+		!(left == right);
+
+	public bool Equals(Token other) =>
+		Equals((object)other);
 }
 
 /// <summary>
