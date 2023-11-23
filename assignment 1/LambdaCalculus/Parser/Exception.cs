@@ -9,7 +9,7 @@ public class UnexpectedTokenException : Exception
 	/// Creates a new unexpected token exception
 	/// </summary>
 	/// <param name="message">The message of the exception</param>
-	public UnexpectedTokenException(string message = "Unexpected token") : base(message) { }
+	public UnexpectedTokenException(string message) : base($"Unexpected token '{message}'") { }
 }
 
 /// <summary>

@@ -4,9 +4,8 @@ using LambdaCalculus.Lambda;
 using LambdaCalculus.Parser;
 
 // Make sure the current input encoding can handle unicode
-// Set the input and output encoding to UTF-8 as most of the expected input is ASCII, making UTF-16 a waste of space
-Console.InputEncoding = Encoding.UTF8;
-Console.OutputEncoding = Encoding.UTF8;
+// Set the input and output encoding to Unicode
+Console.InputEncoding = Console.OutputEncoding = Encoding.Unicode;
 
 // If there's no arguments, run the while loop
 if (args.Length == 0)
