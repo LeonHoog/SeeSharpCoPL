@@ -1,7 +1,7 @@
 # A simple makefile for C# projects
 
 # The name of the C# solution file
-SRC = assignment1.sln
+SRC = assignment2.sln
 
 # The path to the published executable file
 OUT = bin/
