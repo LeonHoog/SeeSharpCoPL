@@ -1,7 +1,9 @@
-﻿using System.Text;
+﻿using System.Data;
+using System.Text;
 
 using LambdaCalculus.Lambda;
 using LambdaCalculus.Parser;
+using LambdaCalculus.Reducer;
 
 // Make sure the current input encoding can handle unicode
 // Set the input and output encoding to Unicode
@@ -39,7 +41,7 @@ void NormalLoop()
 	while (true)
 	{
 		// Ask the user to enter a lambda expression
-		Console.Write("Please enter an untyped lambda function: ");
+		Console.Write("Please enter an untyped lambda function to reduce: ");
 
 		// If the user enters an empty string or exit, exit the program
 		string input = Console.ReadLine()!;
@@ -58,6 +60,10 @@ void ParseTest(string line)
 	try
 	{
 		expression = Parser.Parse(line);
+
+		// If the expression is null, throw an exception
+		if (expression is null)
+			throw new NoNullAllowedException("Expression is null");
 	}
 	catch (Exception e)
 	{
@@ -74,4 +80,10 @@ void ParseTest(string line)
 
 	// Print the expression
 	Parser.Print(expression!);
+
+	// Reduce the expression
+	ILambdaExpression reduced = Reducer.Reduce(expression!);
+
+	// Print the reduced expression
+	Parser.Print(reduced);
 }
