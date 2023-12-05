@@ -7,7 +7,7 @@ using LambdaCalculus.Reducer;
 
 // Make sure the current input encoding can handle unicode
 // Set the input and output encoding to Unicode
-Console.InputEncoding = Console.OutputEncoding = Encoding.Unicode;
+Console.InputEncoding = Console.OutputEncoding = Encoding.UTF8;
 
 // If there's no arguments, run the while loop
 if (args.Length == 0)
@@ -27,9 +27,6 @@ void FileLoop(string path)
 	{
 		// Read the line
 		string line = file.ReadLine()!;
-
-		// Print the line
-		Console.WriteLine($"Read line: {line}");
 
 		// Parse the line
 		ParseTest(line);

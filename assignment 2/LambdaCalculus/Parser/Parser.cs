@@ -21,9 +21,8 @@ public static class Parser
 		// Convert the tokens to a queue where they get consumed from the front
 		Queue<Token> tokenQueue = new(tokens);
 
-		ILambdaExpression? root = ParseApplication();
-
-		return root;
+		// Parse the tokens using recursive descent
+		return ParseApplication();
 
 		// Parse an application
 		ILambdaExpression? ParseApplication()
