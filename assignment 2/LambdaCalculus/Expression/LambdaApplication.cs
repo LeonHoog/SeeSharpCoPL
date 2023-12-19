@@ -37,7 +37,6 @@ public class LambdaApplication : ILambdaExpression
 			return new LambdaApplication(Function.Reduce(), Argument.Reduce());
 	}
 
-
 	/// <summary>
 	/// Substitutes all instances of the variable with the replacement
 	/// </summary>

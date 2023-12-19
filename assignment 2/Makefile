@@ -15,7 +15,7 @@ build:
 
 # The target to run the executable file
 run: build
-	$(OUT)assignment1 positives.txt
+	$(OUT)assignment2 positives.txt
 
 # The target to clean the output files
 clean:

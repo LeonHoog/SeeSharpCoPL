@@ -36,7 +36,6 @@ public class LambdaAbstraction : ILambdaExpression
 		// Beta reduction for lambda abstraction
 		new LambdaAbstraction(Name, Body.Reduce());
 
-
 	/// <summary>
 	/// Substitutes all instances of the variable with the replacement
 	/// </summary>
@@ -48,7 +47,7 @@ public class LambdaAbstraction : ILambdaExpression
         // Perform substitution in the body of the abstraction
         if (Name.Equals(variable))
             // Avoid variable capture by renaming if necessary
-            return this;
+            return replacement;
         else
             return new LambdaAbstraction(Name, Body.Substitute(variable, replacement));
     }
