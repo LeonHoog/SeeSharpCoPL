@@ -42,7 +42,16 @@ public class Reducer
 		Counter++;
 
 		// Reduce the expression
-		ILambdaExpression reduced = expression.Reduce();
+		//ILambdaExpression reduced = expression.Reduce();
+
+		// For now just fix the alpha stuff
+		ILambdaExpression reduced = expression;
+
+		Console.WriteLine("Got the following conflicting variables:");
+        Console.WriteLine(string.Join(", ", reduced.GetConflictVariables().Select(lambdaVariable => lambdaVariable.Name)) + ".");
+
+		reduced.ResolveConflicts();
+
 		// If the expression is the same as the reduced expression, return the reduced expression
 		if (Equals(expression, reduced))
 			return reduced;

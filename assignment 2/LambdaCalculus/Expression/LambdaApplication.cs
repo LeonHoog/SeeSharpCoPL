@@ -26,24 +26,15 @@ public class LambdaApplication : ILambdaExpression
 		Argument = argument;
 	}
 
-	public ILambdaExpression Reduce()
-	{
-		// Beta reduction for lambda application
-		if (Function is LambdaAbstraction abstraction)
-			// Replace all instances of the bound variable with the argument
-			return abstraction.Body.Substitute(abstraction.Name, Argument).Reduce();
-		else
-			// If the function is not an abstraction, reduce its parts
-			return new LambdaApplication(Function.Reduce(), Argument.Reduce());
-	}
+	public IEnumerable<LambdaVariable> GetBoundVariables() => 
+		Function.GetBoundVariables().Concat(Argument.GetBoundVariables());
 
-	/// <summary>
-	/// Substitutes all instances of the variable with the replacement
-	/// </summary>
-	/// <param name="variable">The variable to substitute</param>
-	/// <param name="replacement">The replacement</param>
-	/// <returns>The substituted expression</returns>
-	public ILambdaExpression Substitute(LambdaVariable variable, ILambdaExpression replacement) =>
-		// Perform substitution in both the function and the argument
-		new LambdaApplication(Function.Substitute(variable, replacement), Argument.Substitute(variable, replacement));
+	public IEnumerable<LambdaVariable> GetConflictVariables() =>
+		Function.GetConflictVariables().Concat(Argument.GetConflictVariables());
+
+	public void ResolveConflicts()
+	{
+		Function.ResolveConflicts();
+		Argument.ResolveConflicts();
+	}
 }
