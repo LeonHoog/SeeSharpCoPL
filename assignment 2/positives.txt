@@ -12,3 +12,6 @@ a (b c)
 λ x. a b
 \ x a b
 λ x a b
+(x y)
+(\x x)(\y y)
+(\x x x)(\x x x)
