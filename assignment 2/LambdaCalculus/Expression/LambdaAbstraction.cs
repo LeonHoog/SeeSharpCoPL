@@ -28,27 +28,31 @@ public class LambdaAbstraction : ILambdaExpression
 		Body = body;
 	}
 
-	/// <summary>
-	/// Reduces the expression
-	/// </summary>
-	/// <returns>The reduced expression</returns>
-	public ILambdaExpression Reduce() =>
-		// Beta reduction for lambda abstraction
-		new LambdaAbstraction(Name, Body.Reduce());
+	public IEnumerable<LambdaVariable> GetBoundVariables() =>
+		Body.GetBoundVariables().Append(Name);
 
-	/// <summary>
-	/// Substitutes all instances of the variable with the replacement
-	/// </summary>
-	/// <param name="variable">The variable to substitute</param>
-	/// <param name="replacement">The replacement</param>
-	/// <returns>The substituted expression</returns>
-	public ILambdaExpression Substitute(LambdaVariable variable, ILambdaExpression replacement)
-    {
-        // Perform substitution in the body of the abstraction
-        if (Name.Equals(variable))
-            // Avoid variable capture by renaming if necessary
-            return replacement;
-        else
-            return new LambdaAbstraction(Name, Body.Substitute(variable, replacement));
-    }
+	public IEnumerable<LambdaVariable> GetConflictVariables()
+	{
+		// Get the bound variables of the body
+		IEnumerable<LambdaVariable> boundVariables = Body.GetBoundVariables();
+
+		// Empty enumerable of conflict variables
+		IEnumerable<LambdaVariable> conflictVariables = Enumerable.Empty<LambdaVariable>();
+
+		// If the name is in the bound variables, append the name to the conflict variables
+		if (boundVariables.Contains(Name))
+			conflictVariables = conflictVariables.Append(Name);
+
+		// Return the conflict variables
+		return conflictVariables.Concat(Body.GetConflictVariables());
+	}
+
+
+	public void ResolveConflicts()
+	{
+		while (Body.GetBoundVariables().Contains(Name))
+			Name.Name += "'";
+
+		Body.ResolveConflicts();
+	}
 }

@@ -5,17 +5,22 @@
 /// </summary>
 public interface ILambdaExpression
 {
-	/// <summary>
-	/// Reduces the expression
-	/// </summary>
-	/// <returns>The reduced expression</returns>
-	internal ILambdaExpression Reduce();
+	public void AlphaConverce()
+	{
+
+	}
 
 	/// <summary>
-	/// Substitutes all instances of the variable with the replacement
+	/// Gets the bound variables of the expression
 	/// </summary>
-	/// <param name="variable">The variable to substitute</param>
-	/// <param name="replacement">The replacement</param>
-	/// <returns>The substituted expression</returns>
-	ILambdaExpression Substitute(LambdaVariable variable, ILambdaExpression replacement);
+	/// <returns>The bound variables of the expression</returns>
+	internal IEnumerable<LambdaVariable> GetBoundVariables();
+
+	/// <summary>
+	/// Gets the conflicting variables of the expression
+	/// </summary>
+	/// <returns>The conflicting variables of the expression</returns>
+	internal IEnumerable<LambdaVariable> GetConflictVariables();
+
+	internal void ResolveConflicts();
 }
